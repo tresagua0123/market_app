@@ -1,0 +1,40 @@
+<h3>Dashboard</h3>
+
+<div class="row">
+    <div class="col-md-4">
+    <h3>Books
+    <%= link_to 'New Book', 
+    new_book_path, class: "btn btn-primary btn-sm"  %>
+    </h3>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Available</th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <% @books.each do |book| %>
+            <th scope="row">1</th>
+            <td><%= book.id  %></td>
+            <td><%= link_to book.name, book_path(book)  %></td>
+            <td><%= book.availability  %></td>
+            <td><%= link_to 'Edit', edit_book_path(book)  %></td>
+            <% end %>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div class="col-md-4">
+    <h3>Purchases</h3>
+    </div>
+
+    <div class="col-md-4">
+    <h3>Sales</h3>
+    </div>
+
+</div>
