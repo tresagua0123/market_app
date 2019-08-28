@@ -64,3 +64,4 @@ gem 'bootstrap'
 gem 'simple_form'
 gem 'devise'
 gem 'cancan'
+gem 'paperclip', "~> 5.0.0"
