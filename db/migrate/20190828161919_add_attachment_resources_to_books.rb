@@ -1,11 +1,11 @@
-class AddAttachmentResourcesToBooks < ActiveRecord::Migration
+class AddAttachmentResourcesToBooks < ActiveRecord::Migration[5.2]
   def self.up
     change_table :books do |t|
-      t.attachment :resources
+      t.attachment :resource
     end
   end
 
   def self.down
-    remove_attachment :books, :resources
+    remove_attachment :books, :resource
   end
 end
