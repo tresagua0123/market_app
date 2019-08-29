@@ -1,7 +1,7 @@
 
 
 <div class="card col-md-4 p-4">
-    <%= image_tag 'cover.jpg', class: "card-img-top"  %>
+    <%= image_tag book.image.url, class: "card-img-top"  %>
     <div class="card-body">
       <h5><strong><%= link_to book.name, book_path(book)  %></strong></h5>
       <p><%= book.price %>円</p>

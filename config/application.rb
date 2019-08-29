@@ -15,14 +15,15 @@ module MarketApp
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    config.paperclip_default = {
-      storage: :s3,
-      s3_credentials: {
-        bucket: ENV['AWS_BUCKET'],
-        access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-        s3_region: ENV['AWS_REGION']
-      }
+    
+    config.paperclip_defaults = {
+    :storage        => :s3,
+    :bucket         => ENV['AWS_BUCKET'],
+    :s3_region      => ENV['AWS_REGION'],
+    :s3_credentials => {
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     }
+  }
   end
 end
