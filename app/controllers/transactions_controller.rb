@@ -1,24 +1,36 @@
 class TransactionsController < ApplicationController 
 
-    def create
-        book = Book.find_by!(slug: params[:slug])
-        token = params[:stripeToken]
+    def new
+    end
 
+    def create
+        
+        book = Book.find_by!(slug: params[:slug])
         begin
-            charge = Stripe::Charge.create(
-            :amount      => book.price
-            :description => current_user.email,
-            :currency    => 'jpy', 
-            :card        => token
-        )
+        
+          
+        
+            customer = Stripe::Customer.create(
+            :email => params[:stripeEmail], 
+            :source  => params[:stripeToken] 
+          )
+        #token = params[:stripeToken]
+        charge = Stripe::Charge.create(
+            :customer    => customer.id,
+            :amount      => book.price,
+            :description => 'Rails Stripe customer',
+            :currency    => 'usd'
+          )
+   
 
         @sale = book.sales.create!(buyer_email: current_user.email)
             redirect_to pickup_url(uuid: @sale.uuid)
-        
         rescue Stripe::CardError => e
             flash[:notice] = e.message
-            redirect_to book_path(book)
-        end   
+        ensure
+        
+
+        end
     end
 
     def pickup

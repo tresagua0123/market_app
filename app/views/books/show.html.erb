@@ -7,8 +7,34 @@
   <div class="col-md-6">
   <h3><%= @book.name %> by <%= @book.author %></h3>
   <p><%= @book.description %></p>
-  <p class="text-center"><strong><%= @book.price  %></strong>Japanese Yen</p>
+ <p class="text-center"><strong><%= @book.price  %></strong>Japanese Yen</p>
+
+ 
+  <% if current_user %>
+   <%= form_tag buy_path(slug: @book.slug) do %>
+   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description= "<%= @book.name %>"
+          data-name = "eBook"
+          data-amount= "<%= @book.price %>"
+          data-email="<%= current_user.email %>"
+          data-locale="auto"></script>
+  <% end %>
+  <% else %>
+  <p>Please log in to purchase this book</p>
+  <% end %>
   
+
+ <!--
+   <%= form_tag pay_path(slug: @book.slug) do %>
+  <script type="text/javascript"
+    src="https://checkout.pay.jp"
+    class="payjp-button"
+    data-key="pk_test_0383a1b8f91e8a6e3ea0e2a9">
+  </script>
+<% end %>
+-->
+
   </div>
 </div>
 
