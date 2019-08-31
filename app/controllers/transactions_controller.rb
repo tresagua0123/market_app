@@ -4,12 +4,24 @@ class TransactionsController < ApplicationController
     end
 
     def create
-        
+     
         book = Book.find_by!(slug: params[:slug])
-        begin
+        sale = book.sales.create(
+            amount: book.price, 
+            buyer_email: current_user.email,
+            seller_email: book.user.email,
+            stripe_token: params[:stripeToken])
+        sale.process! 
         
-          
-        
+
+        if sale.finished?
+            redirect_to pickup_url(uuid: sale.uuid)
+        else
+            redirect_to book_path(book), 
+            notice: e.message
+         
+=begin       
+        begin       
             customer = Stripe::Customer.create(
             :email => params[:stripeEmail], 
             :source  => params[:stripeToken] 
@@ -24,11 +36,13 @@ class TransactionsController < ApplicationController
    
 
         @sale = book.sales.create!(buyer_email: current_user.email)
-            redirect_to pickup_url(uuid: @sale.uuid)
+=end
+        #redirect_to pickup_url(uuid: @sale.uuid)
+=begin
         rescue Stripe::CardError => e
             flash[:notice] = e.message
         ensure
-        
+=end 
 
         end
     end
