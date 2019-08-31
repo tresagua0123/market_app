@@ -6,38 +6,17 @@
     <%= link_to 'New Book', 
     new_book_path, class: "btn btn-primary btn-sm"  %>
     </h3>
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Available</th>
-            <th scope="col"></th>
-            <br>
-            </tr>
-        </thead>
-        <tbody>
-            
-            <% @books.each do |book| %>
-            <tr>
-            <th scope="row">1</th>
-            <td><%= book.id  %></td>
-            <td><%= link_to book.name, book_path(book)  %></td>
-            <td><%= book.availability  %></td>
-            <td><%= link_to 'Edit', edit_book_path(book)  %></td>
-             </tr>
-            <% end %>
-           
-        </tbody>
-    </table>
+    <%= render 'books'  %>
     </div>
 
     <div class="col-md-4">
     <h3>Purchases</h3>
+    <%= render 'purchased'  %>
     </div>
 
     <div class="col-md-4">
     <h3>Sales</h3>
+    <%= render 'sales'  %>
     </div>
 
 </div>

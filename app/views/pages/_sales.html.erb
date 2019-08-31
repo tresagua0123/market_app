@@ -1,0 +1,23 @@
+<table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Buyer</th>
+            <th scope="col"></th>
+            <br>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% @sales.each do |sale| %>
+            <tr>
+            <th scope="row">1</th>
+            <td><%= link_to sale.book.name, pickup_path(sale.uuid)  %></td>
+            <td><%= time_ago_in_words(sale.created_at) %> ago</td>
+            <td><%= sale.buyer_email%> ago</td>
+             </tr>
+            <% end %>
+           
+        </tbody>
+    </table>
